@@ -1,6 +1,13 @@
+import sys, os
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+
 import json
 import pytest
 from app import app
+
+@pytest.fixture
+def client():
+    return app.test_client()
 
 class DummyPipeline:
     def __init__(self, kind=None):
@@ -25,10 +32,12 @@ def patch_pipelines(monkeypatch):
     monkeypatch.setattr(appmod, "kw_model", DummyKeyBert())
 
 def test_analyze_keywords(client):
-    c = app.test_client()
-    r = c.post("/api/analyze", json={"text":"This is a short test about python."})
-    assert r.status_code == 200
+    c = client
+    # Make text longer than 80 chars so router picks 'keywords'
+    text = "This is a test paragraph about Python, Flask, and Hugging Face. " * 3
+    r = c.post("/api/analyze", json={"text": text})
     data = r.get_json()
+    assert r.status_code == 200
     assert "keywords" in data
     assert data["keywords"][0] == "keyword1"
 
