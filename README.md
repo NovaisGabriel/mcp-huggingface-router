@@ -1,6 +1,9 @@
 # 🧠 MCP-HF: Multi-Capability Processor using Hugging Face
 
 ## 📘 Overview
+
+![](https://github.com/NovaisGabriel/mcp-huggingface-router/blob/main/imgs/mcp_gif.gif)
+
 **MCP-HF** (Multi-Capability Processor using Hugging Face) is a full-stack demo project inspired by [NovaisGabriel/mcp-langchain](https://github.com/NovaisGabriel/mcp-langchain).  
 It demonstrates how to build a small modular system capable of analyzing text through multiple NLP tasks — all orchestrated by a simple router layer.
 
